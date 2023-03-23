@@ -23,7 +23,7 @@
                             $imagen_full = wp_get_attachment_image_src($id, 'full')[0];
                     ?>
                         <li>
-                            <a href="<?php echo $imagen_full; ?>">
+                            <a data-lightbox="galeria" href="<?php echo $imagen_full; ?>">
                                 <img src="<?php echo $imagen_grande; ?>" alt="Imagen galeria">
                             </a>
                         </li>

@@ -22,9 +22,13 @@ function gymfitness_menus() {
 add_action('init', 'gymfitness_menus');
 
 function gymfitness_scripts_styles() {
-
+    // Archivos CSS
     wp_enqueue_style('normalize','https://necolas.github.io/normalize.css/8.0.1/normalize.css', array(),'8.0.1');
+    wp_enqueue_style('lightboxcss', get_template_directory_uri() . '/css/lightbox.css', array(), '2.11.4' );
     wp_enqueue_style('style',get_stylesheet_uri(), array('normalize'), '1.0.0');
+
+    //Archivos JS
+    wp_enqueue_script('lightboxjs', get_template_directory_uri() . '/js/lightbox.js', array('jquery'), '2.11.4', true);
 }
 
 add_action('wp_enqueue_scripts', 'gymfitness_scripts_styles');
@@ -50,3 +54,19 @@ function gymfitness_widgets() {
     ));
 }
 add_action('widgets_init','gymfitness_widgets');
+
+// Crear shortcode para Leaflet map:
+function gymfitness_ubicacion_shortcode(){
+?>
+    <div class="mapa">
+        <?php
+        if(is_page('contacto')) {
+            the_field('ubicacion');
+        }
+        ?>
+    </div>
+    <h2 class="text-center text-primary">Formulario de Contacto</h2>
+<?php
+    echo do_shortcode('[contact-form-7 id="86" title="Contact form"]');
+}
+add_shortcode('gymfitness_ubicacion', 'gymfitness_ubicacion_shortcode');
